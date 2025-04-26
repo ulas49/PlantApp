@@ -7,6 +7,9 @@ module.exports = {
       fontFamily: {
         rubik: ["Rubik-normal"],
         'rubik-semibold': ["Rubik-semibold"],
+        'rubik-medium': ["Rubik-medium"],
+        'rubik-bold': ["Rubik-bold"],
+        'rubik-extrabold': ["Rubik-extrabold"],
       },
     },
   },

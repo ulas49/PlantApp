@@ -9,7 +9,10 @@ const GetStartedScreen = () => {
 
   const [fontsLoaded] = useFonts({
     'Rubik-normal': require('../assets/fonts/Rubik-Regular.ttf'),
-    'Rubik-semibold': require('../assets/fonts/Rubik-SemiBold.ttf')
+    'Rubik-medium': require('../assets/fonts/Rubik-Medium.ttf'),
+    'Rubik-semibold': require('../assets/fonts/Rubik-SemiBold.ttf'),
+    'Rubik-bold': require('../assets/fonts/Rubik-Bold.ttf'),
+    'Rubik-extrabold': require('../assets/fonts/Rubik-ExtraBold.ttf')
   });
 
   if (!fontsLoaded) {
@@ -44,7 +47,7 @@ const GetStartedScreen = () => {
         <View  className='items-center mb-2' >
           <TouchableOpacity
             className="bg-[#28AF6E] p-[18px] rounded-xl w-[327px]"
-            onPress={() => router.push('/onboarding')}
+            onPress={() => router.push('/onboarding-take-photo')}
           >
             <Text className="text-white text-center font-bold text-lg ">Get Started</Text>
           </TouchableOpacity>      
