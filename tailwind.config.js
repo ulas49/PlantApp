@@ -3,7 +3,12 @@ module.exports = {
   content: ["./app/**/*.{js,jsx,ts,tsx}"],
   presets: [require("nativewind/preset")],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        rubik: ["Rubik-normal"],
+        'rubik-semibold': ["Rubik-semibold"],
+      },
+    },
   },
   plugins: [],
 }
