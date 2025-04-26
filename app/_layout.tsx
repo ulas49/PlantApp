@@ -5,7 +5,10 @@ export default function RootLayout() {
 
   return <Stack 
   screenOptions={{
-    headerShown:false
+    headerShown:false,
+    animation: 'fade'
   }}
-  > </Stack>;
+  > 
+  <Stack.Screen name="paywall" options={{ animation: 'slide_from_bottom' }} />
+  </Stack>;
 }
