@@ -1,12 +1,65 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text, ImageBackground, Image, TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-const OnboardingCareGuide = () => {
+export default function OnboardingTakePhoto() {
+  const router = useRouter();
+
   return (
-    <View>
-      <Text>OnboardingCareGuide</Text>
-    </View>
-  )
-}
 
-export default OnboardingCareGuide
+    <ImageBackground
+      source={require('../assets/images/Onboarding2BG.png')}
+      resizeMode="cover"
+      className='flex-1 '
+    >
+      <SafeAreaView className="flex-1 justify-between items-center">
+
+        <View className="items-center mt-[35px]  ">
+          <Text className="text-[28px] font-rubik-medium text-[#13231B] ">
+            Get plant <Text className="font-rubik-bold ">care guides</Text>
+          </Text>
+        </View>
+
+        <View className="w-full h-[530px] items-center relative justify-center  ">
+
+          <Image
+            source={require('../assets/images/Onboarding2Object.png')}
+            resizeMode="contain"
+            className="absolute"
+
+          />
+          <Image
+            source={require('../assets/images/Onboarding2Artwork.png')}
+            resizeMode="contain"
+            className="absolute right-0 top-0 z-10 "
+
+          />
+          <Image
+            source={require('../assets/images/Onboarding2Iphone.png')}
+            resizeMode="contain"
+            className="w-[261px] h-[540px] mt-40"
+          />
+        </View>
+
+
+        <View className="w-full items-center mb-5">
+          <TouchableOpacity
+             className="bg-[#28AF6E] w-[327px] p-[18px] rounded-xl "
+             onPress={() => router.push('/paywall')}
+
+          >
+            <Text className="text-white text-center font-bold text-lg">Continue</Text>
+          </TouchableOpacity>
+
+          <View className="flex-row items-center justify-center space-x-2 mt-6">
+            <View className="w-2 h-2 rounded-full bg-gray-400 opacity-50 mr-2" />
+            <View className="w-3 h-3 rounded-full bg-black mr-2" />
+            <View className="w-2 h-2 rounded-full bg-gray-400 opacity-50 " />
+
+          </View>
+        </View>
+      </SafeAreaView>
+    </ImageBackground>
+
+  );
+}
