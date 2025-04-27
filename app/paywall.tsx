@@ -1,11 +1,33 @@
 import { View, Text, ImageBackground, TouchableOpacity, FlatList, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
+import FeatureCard from '@/components/FeatureCard';
+import PlanCard from '@/components/PlanCard';
+import { useState } from 'react';
+
+const features = [
+  {
+    icon: require('../assets/images/PaywallScanIcon.png'),
+    title: 'Unlimited',
+    subtitle: 'Plant Identify',
+  },
+  {
+    icon: require('../assets/images/PaywallTimeIcon.png'),
+    title: 'Faster',
+    subtitle: 'Process',
+  },
+  {
+    icon: require('../assets/images/PaywallHalfIcon.png'),
+    title: 'Detailed',
+    subtitle: 'Plant Care',
+  },
+];
 
 
 
 export default function Paywall() {
   const router = useRouter();
+  const [selectedPlan, setSelectedPlan] = useState<'month' | 'year'>('year');
 
   return (
     <ImageBackground
@@ -26,53 +48,32 @@ export default function Paywall() {
         </View>
 
         <View className="flex-row justify-between mt-10  gap-2  ">
-          <View className="rounded-[12px] p-4 w-[156px]  h-[130px] bg-[#233029B2]  " >
-            <Image source={require('../assets/images/PaywallScanIcon.png')} />
-            <Text className="text-white  font-rubik-medium text-xl mt-2">Unlimited</Text>
-            <Text className="text-white  font-rubik text-[12px] mt-1">Plant Identify</Text>
-          </View>
-          <View className="rounded-[12px] p-4 w-[156px]  h-[130px] bg-[#233029B2] " >
-            <Image source={require('../assets/images/PaywallTimeIcon.png')} />
-            <Text className="text-white  font-rubik-medium text-xl mt-2">Faster</Text>
-            <Text className="text-white  font-rubik text-[12px] mt-1">Process</Text>
-          </View>
-          <View className="rounded-[12px] p-4 w-[156px]  h-[130px] bg-[#233029B2] " >
-            <Image source={require('../assets/images/PaywallHalfIcon.png')} />
-            <Text className="text-white  font-rubik-medium text-xl mt-2">Detailed</Text>
-            <Text className="text-white  font-rubik text-[12px] mt-1">Plant care</Text>
-          </View>
+          <FlatList
+            data={features}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => (<FeatureCard icon={item.icon} title={item.title} subtitle={item.subtitle} />)}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            ItemSeparatorComponent={() => <View className="w-1" />}
+          />
         </View>
 
-        <View className="mt-10">
+        <View className="mt-10 ">
 
-          <TouchableOpacity className="border border-white/20 bg-[#1C2923] rounded-xl p-4 flex-row items-center  mb-6">
-            <View className='w-8 h-8 rounded-3xl bg-[#2E3A34] mr-4' />
-            <View>
-              <Text className="text-white font-rubik-bold" > 1 Month</Text>
-              <Text className="text-gray-400  text-xs mt-1 font-rubik">
-                $2.99/month, <Text className='font-rubik-medium text-[#FFFFFFB2]'>auto renewable</Text>
-              </Text></View>
-          </TouchableOpacity>
+          <PlanCard
+            selected={selectedPlan === "month"}
+            title='1 Month'
+            description='$2.99/month, auto renewable'
+            onPress={() => setSelectedPlan("month")}
+          />
 
-
-          <TouchableOpacity className="border-2 border-green-500 bg-black/20 rounded-xl p-4 relative flex-row items-center">
-            <View className='w-8 h-8 rounded-3xl bg-[#28AF6E] mr-4 justify-start relative' >
-              <View className='w-3 h-3 rounded-3xl bg-white absolute  top-1/2 left-1/2   -translate-x-1/2 -translate-y-1/2' />
-            </View>
-            <View>
-              <Text className="text-white font-rubik">1 Year</Text>
-              <Text className="text-gray-400  text-xs mt-1 font-rubik">
-                First 3 days free, then $529.99/year
-              </Text>
-            </View>
-
-
-
-
-            <View className="absolute top-2 right-2 bg-green-500 px-2 py-1 rounded-md">
-              <Text className="text-white text-[10px] font-rubik-bold">Save 50%</Text>
-            </View>
-          </TouchableOpacity>
+          <PlanCard
+            selected={selectedPlan === "year"}
+            title='1 Year'
+            description='First 3 days free, then $529.99/year'
+            onPress={() => setSelectedPlan("year")}
+            badge="Save 50%"
+          />
         </View>
 
 
@@ -80,6 +81,7 @@ export default function Paywall() {
           <TouchableOpacity className="bg-[#28AF6E] p-4 rounded-xl">
             <Text className="text-white text-center font-bold text-lg">Try free for 3 days</Text>
           </TouchableOpacity>
+
         </View>
 
 
