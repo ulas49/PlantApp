@@ -38,7 +38,7 @@ export default function Paywall() {
       <SafeAreaView className="flex-1 px-6">
 
 
-        <View className=" justify-center flex-1 mt-24">
+        <View className=" justify-center flex-1 mt-48">
           <Text className="text-white text-[30px] font-rubik-bold">
             PlantApp <Text className="font-rubik">Premium</Text>
           </Text>

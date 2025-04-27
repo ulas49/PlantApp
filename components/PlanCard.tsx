@@ -11,7 +11,7 @@ interface PlanCardProps {
 export default function PlanCard({ selected, title, description, badge, onPress }: PlanCardProps) {
   return (
     <TouchableOpacity 
-      className={`rounded-xl p-4 flex-row items-center relative mb-4  ${selected ? 'border-green-500 bg-black/20 border-[1.5px]' : 'border-[#FFFFFF4D] bg-[#1C2923] border '}`}
+      className={`rounded-xl p-4 flex-row items-center relative mb-2  ${selected ? 'border-green-500 bg-black/20 border-[1.5px]' : 'border-[#FFFFFF4D] bg-[#1C2923] border '}`}
       onPress={onPress}
       activeOpacity={0.7}
     >
