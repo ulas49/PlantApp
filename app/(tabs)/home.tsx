@@ -10,70 +10,41 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { EvilIcons } from "@expo/vector-icons";
+import { RootState, AppDispatch } from "@/store";
+import { useEffect } from "react";
+import { fetchQuestions } from "@/store/questionsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCategories } from "@/store/categoriesSlice";
 
-const questions = [
-  {
-    id: "1",
-    title: "How to identify plants?",
-    subtitle: "Life Style",
-    image_uri:
-      "https://firebasestorage.googleapis.com/v0/b/flora---plant-identifier.appspot.com/o/public%2FCard.png?alt=media",
-  },
-  {
-    id: "2",
-    title: "Differences Between Species and Varieties?",
-    subtitle: "Plant Identify",
-    image_uri:
-      "https://firebasestorage.googleapis.com/v0/b/flora---plant-identifier.appspot.com/o/public%2Fcard2.png?alt=media",
-  },
-  {
-    id: "3",
-    title: "Why same plant can look different?",
-    subtitle: "Life Style",
-    image_uri:
-      "https://firebasestorage.googleapis.com/v0/b/flora---plant-identifier.appspot.com/o/public%2FCard3.png?alt=media",
-  },
-];
 
-const categories = [
-  {
-    id: "1",
-    title: "Edible Plants",
-    image_uri: "https://cms-cdn.plantapp.app/5_d2384a3938/5_d2384a3938.png",
-  },
-  {
-    id: "2",
-    title: "Ferns",
-    image_uri: "https://cms-cdn.plantapp.app/6_edbcc6988a/6_edbcc6988a.png",
-  },
-  {
-    id: "3",
-    title: "Cacti and Succulents",
-    image_uri: "https://cms-cdn.plantapp.app/5_d2384a3938/5_d2384a3938.png",
-  },
-  {
-    id: "4",
-    title: "Flowering Plants",
-    image_uri: "https://cms-cdn.plantapp.app/2_4a226c9ae7/2_4a226c9ae7.png",
-  },
-  {
-    id: "5",
-    title: "Cacti and Succulents",
-    image_uri: "https://cms-cdn.plantapp.app/5_d2384a3938/5_d2384a3938.png",
-  },
-  {
-    id: "6",
-    title: "Flowering Plants",
-    image_uri: "https://cms-cdn.plantapp.app/2_4a226c9ae7/2_4a226c9ae7.png",
-  },
-  {
-    id: "7",
-    title: "Cacti and Succulents",
-    image_uri: "https://cms-cdn.plantapp.app/5_d2384a3938/5_d2384a3938.png",
-  },
-];
 
 export default function HomeScreen() {
+  const dispatch = useDispatch<AppDispatch>()
+  const { data: questions, loading, error } = useSelector((state: RootState) => state.questions);
+  const { data: categories, loading: categoriesLoading, error: categoriesError } = useSelector((state: RootState) => state.categories);
+
+  useEffect(() => {
+    dispatch(fetchQuestions());
+    dispatch(fetchCategories());
+  }, []);
+
+
+  if (loading || categoriesLoading) {
+    return (
+      <SafeAreaView className="flex-1 justify-center items-center bg-white">
+        <Text>Loading...</Text>
+      </SafeAreaView>
+    );
+  }
+
+  if (error || categoriesError) {
+    return (
+      <SafeAreaView className="flex-1 justify-center items-center bg-white">
+        <Text>Error loading data</Text>
+      </SafeAreaView>
+    );
+  }
+
   return (
     <SafeAreaView className="flex-1  bg-white">
       <Image
@@ -82,25 +53,25 @@ export default function HomeScreen() {
         resizeMode="cover"
       />
 
-      
-        <View className="mt-6 relative ml-6">
-          <Text className="text-[#13231B] font-rubik text-[20px]">  
-            Hi, plant lover!
-          </Text>
-          <Text className="text-[#13231B] font-rubik-semibold text-2xl mt-1 mb-[6px]">
-            Good Afternoon! 🌥
-          </Text>
-        </View>
 
-        <View className=" bg-[#FFFFFFE0] border-[0.2px] border-[#3C3C4340] rounded-xl flex-row items-center px-4 py-3 ml-4 w-[327px] ">
-          <EvilIcons name="search" size={24} color="#ABABAB" className="mr-2" />
-          <TextInput
-            placeholder="Search for plants"
-            placeholderTextColor="#A3A3A3"
-            className="flex-1 font-rubik"
-          />
-        </View>
-        <ScrollView showsVerticalScrollIndicator={false} className="px-5">
+      <View className="mt-6 relative ml-6">
+        <Text className="text-[#13231B] font-rubik text-[20px]">
+          Hi, plant lover!
+        </Text>
+        <Text className="text-[#13231B] font-rubik-semibold text-2xl mt-1 mb-[6px]">
+          Good Afternoon! 🌥
+        </Text>
+      </View>
+
+      <View className=" bg-[#FFFFFFE0] border-[0.2px] border-[#3C3C4340] rounded-xl flex-row items-center px-4 py-3 ml-4 w-[327px] ">
+        <EvilIcons name="search" size={24} color="#ABABAB" className="mr-2" />
+        <TextInput
+          placeholder="Search for plants"
+          placeholderTextColor="#A3A3A3"
+          className="flex-1 font-rubik"
+        />
+      </View>
+      <ScrollView showsVerticalScrollIndicator={false} className="px-5">
         <TouchableOpacity className="bg-[#24201A] rounded-xl flex-row items-center  h-16 mt-5 ">
           <Image
             source={require("../../assets/images/HomeEnvelopeIcon.png")}
@@ -130,7 +101,7 @@ export default function HomeScreen() {
 
           <FlatList
             data={questions}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item.id.toString()}
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{ gap: 12 }}
@@ -156,13 +127,13 @@ export default function HomeScreen() {
           <FlatList
             data={categories}
             numColumns={2}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item.id.toString()}
             columnWrapperStyle={{ justifyContent: "space-between" }}
             showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
               <TouchableOpacity className="bg-[#F2F3F2] rounded-xl mb-4 w-[158px] h-[152px] overflow-hidden ">
                 <ImageBackground
-                  source={{ uri: item.image_uri }}
+                  source={{ uri: item.image.url }}
                   className="w-full h-[100px]"
                   resizeMode="cover"
                 />
