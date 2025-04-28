@@ -1,50 +1,89 @@
-# Welcome to your Expo app 👋
+# 🌿 PlantApp - React Native Case Study
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+PlantApp is a mobile application that helps users identify plants, access care guides, and manage their plant collections.\
+This project was built with **React Native + Expo + Tailwind + Redux** technologies.
 
-## Get started
+---
 
-1. Install dependencies
+## 🚀 Project Structure
 
-   ```bash
-   npm install
-   ```
+- **Get Started Screen:** Welcomes the user upon launching the app.
+- **Onboarding Flow:** Introduces app features to the user (2 steps).
+- **Paywall Screen:** Subscription screen where the user selects a payment plan.
+- **Home Screen:** Main screen where questions and categories are listed.
+- **Tabs Structure:** Main navigation (`home`, `diagnose`, `scan`, `mygarden`, `profile`).
+- **Redux:** State management is handled by fetching Questions and Categories API data.
+- **Dynamic Navigation:** After completing the flow, the user cannot navigate back to previous screens.
 
-2. Start the app
+---
 
-   ```bash
-    npx expo start
-   ```
+## 🛠️ Technologies Used
 
-In the output, you'll find options to open the app in a
+- **React Native**
+- **Expo Router**
+- **TypeScript**
+- **Nativewind (Tailwind CSS for React Native)**
+- **Redux Toolkit**
+- **Expo WebView**
+- **SafeAreaView**
+- **Ionicons**
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+---
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 🧭 User Flow
 
-## Get a fresh project
+1. Get Started → Onboarding 1 → Onboarding 2 → Paywall → Home
+2. **replace navigation** is used so that users cannot return to previous screens once they reach Home.
+3. On the Home screen:
+   - Questions (Get Started section) are listed.
+   - Categories (Plant Types) are listed.
+   - Clicking on questions opens a detail page via WebView.
 
-When you're ready, run:
+---
+
+## 🖼️ Screens
+
+- Get Started Screen
+- Onboarding Take Photo
+- Onboarding Care Guide
+- Paywall Screen
+- Home Screen (Questions and Categories)
+- Diagnose / My Garden / Profile → Coming Soon placeholder screens
+- Scan Tab (Camera icon + Start Scan button)
+
+---
+
+## 📦 Installation
 
 ```bash
-npm run reset-project
+git clone https://github.com/ulas49/PlantApp.git
+cd your file directory
+npm install
+npx expo start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
+## ⚙️ Notes
 
-To learn more about developing your project with Expo, look at the following resources:
+- **replace() navigation** ensures the user cannot navigate back to Get Started, Onboarding, or Paywall screens after reaching Home.
+- **FlatList usage** on Home Screen is optimized for performance.
+- **Loading states** are managed with ActivityIndicator.
+- **Pixel Perfect** design is targeted and aligned with the Figma design.
+- **Search input** is currently for visual purposes only; it does not have active functionality.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+---
 
-## Join the community
+## 📄 License
 
-Join our community of developers creating universal apps.
+This project is a case study and is not intended for commercial use.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+---
+
+## ✨ Developer
+
+- Name: Ulaş Beyaz
+- LinkedIn: https://www.linkedin.com/in/ulaş-beyaz-65aab6284/
+
+---
+
