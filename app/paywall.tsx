@@ -4,7 +4,10 @@ import { useRouter } from 'expo-router';
 import FeatureCard from '@/components/FeatureCard';
 import PlanCard from '@/components/PlanCard';
 import { useState } from 'react';
-
+import { setPlan } from '@/store/userSlice';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@/store';
+import { Ionicons } from '@expo/vector-icons'; 
 const features = [
   {
     icon: require('../assets/images/PaywallScanIcon.png'),
@@ -28,6 +31,17 @@ const features = [
 export default function Paywall() {
   const router = useRouter();
   const [selectedPlan, setSelectedPlan] = useState<'month' | 'year'>('year');
+  const dispatch = useDispatch<AppDispatch>();
+  const handleTryFree = () => {
+    // dispatch(setPlan('pro')); 
+    router.replace('/home');
+  };
+
+  const handleSkip = () => {
+    // dispatch(setPlan('free'));
+    router.replace('/home');
+  };
+
 
   return (
     <ImageBackground
@@ -36,6 +50,15 @@ export default function Paywall() {
       className="flex-1"
     >
       <SafeAreaView className="flex-1 px-6">
+
+
+      <TouchableOpacity 
+          onPress={handleSkip} 
+          className="absolute top-12 right-6 z-50"
+          activeOpacity={0.7}
+        >
+          <Ionicons name="close" size={28} color="white" />
+        </TouchableOpacity>
 
 
         <View className=" justify-center flex-1 mt-48">
@@ -78,7 +101,7 @@ export default function Paywall() {
 
 
         <View className="mt-6">
-          <TouchableOpacity className="bg-[#28AF6E] p-4 rounded-xl">
+          <TouchableOpacity className="bg-[#28AF6E] p-4 rounded-xl" onPress={handleTryFree} >
             <Text className="text-white text-center font-bold text-lg">Try free for 3 days</Text>
           </TouchableOpacity>
 
