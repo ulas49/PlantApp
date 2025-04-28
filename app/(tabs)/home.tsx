@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
   FlatList,
+  ActivityIndicator,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { EvilIcons } from "@expo/vector-icons";
@@ -15,10 +16,12 @@ import { useEffect } from "react";
 import { fetchQuestions } from "@/store/questionsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "@/store/categoriesSlice";
+import { useRouter } from "expo-router";
 
 
 
 export default function HomeScreen() {
+  const router = useRouter();
   const dispatch = useDispatch<AppDispatch>()
   const { data: questions, loading, error } = useSelector((state: RootState) => state.questions);
   const { data: categories, loading: categoriesLoading, error: categoriesError } = useSelector((state: RootState) => state.categories);
@@ -32,8 +35,8 @@ export default function HomeScreen() {
   if (loading || categoriesLoading) {
     return (
       <SafeAreaView className="flex-1 justify-center items-center bg-white">
-        <Text>Loading...</Text>
-      </SafeAreaView>
+      <ActivityIndicator size="large" color="#28AF6E" />
+    </SafeAreaView>
     );
   }
 
@@ -106,7 +109,9 @@ export default function HomeScreen() {
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{ gap: 12 }}
             renderItem={({ item }) => (
-              <TouchableOpacity className="w-[240px] h-[164px]  rounded-xl overflow-hidden  ">
+              <TouchableOpacity 
+              className="w-[240px] h-[164px]  rounded-xl overflow-hidden "  
+              onPress={() => router.push({ pathname: '/webview', params: { url: item.uri } })}>
                 <ImageBackground
                   source={{ uri: item.image_uri }}
                   className="w-[240] h-[164px] flex-1 justify-end "

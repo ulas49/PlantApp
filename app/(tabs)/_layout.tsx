@@ -15,7 +15,9 @@ export default function TabLayout() {
           borderTopWidth: 0,
           height: 84,
           paddingBottom: 10,
-          paddingTop: 10,
+
+          justifyContent: "center",
+          alignItems: "center",  
         },
         tabBarLabelStyle: {
           fontSize: 10,
@@ -49,20 +51,21 @@ export default function TabLayout() {
             <TouchableOpacity
               onPress={onPress}
               style={{
-                width: 64,
-                height: 64,
-                borderRadius: 32,
+                width: 74,
+                height: 74,
+                borderRadius: 40,
                 backgroundColor: "#28AF6E",
                 alignItems: "center",
                 justifyContent: "center",
                 position: "absolute",
-                bottom: isSmallDevice ? 10 : 30,
+                bottom: isSmallDevice ? 10 : 60,
                 alignSelf: "center",
                 zIndex: 10,
               }}
             >
               <Image
                 source={require("../../assets/images/ScanwithoutBG.png")}
+                className="w-8 h-8"
               />
             </TouchableOpacity>
           ),
