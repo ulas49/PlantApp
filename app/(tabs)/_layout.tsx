@@ -58,7 +58,7 @@ export default function TabLayout() {
                 alignItems: "center",
                 justifyContent: "center",
                 position: "absolute",
-                bottom: isSmallDevice ? 10 : 40,
+                bottom: isSmallDevice ? 10 : 30,
                 alignSelf: "center",
                 zIndex: 10,
               }}
