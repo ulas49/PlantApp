@@ -34,7 +34,7 @@ export default function OnboardingTakePhoto() {
 
    <View className="w-full items-center mb-5">
      <TouchableOpacity
-       onPress={() => router.push('/onboarding-care-guide')}
+       onPress={() => router.replace('/onboarding-care-guide')}
        className="bg-[#28AF6E] w-[327px] p-[18px] rounded-xl "
      >
        <Text className="text-white text-center font-bold text-lg">Continue</Text>

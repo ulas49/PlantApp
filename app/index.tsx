@@ -47,7 +47,7 @@ const GetStartedScreen = () => {
         <View  className='items-center mb-2' >
           <TouchableOpacity
             className="bg-[#28AF6E] p-[18px] rounded-xl w-[327px]"
-            onPress={() => router.push('/onboarding-take-photo')}
+            onPress={() => router.replace('/onboarding-take-photo')}
           >
             <Text className="text-white text-center font-bold text-lg ">Get Started</Text>
           </TouchableOpacity>      

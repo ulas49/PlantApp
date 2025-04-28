@@ -7,7 +7,8 @@ import { useState } from 'react';
 import { setPlan } from '@/store/userSlice';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/store';
-import { Ionicons } from '@expo/vector-icons'; 
+import { Ionicons } from '@expo/vector-icons';
+
 const features = [
   {
     icon: require('../assets/images/PaywallScanIcon.png'),
@@ -52,8 +53,8 @@ export default function Paywall() {
       <SafeAreaView className="flex-1 px-6">
 
 
-      <TouchableOpacity 
-          onPress={handleSkip} 
+        <TouchableOpacity
+          onPress={handleSkip}
           className="absolute top-12 right-6 z-50"
           activeOpacity={0.7}
         >
@@ -70,33 +71,68 @@ export default function Paywall() {
           </Text>
         </View>
 
-        <View className="flex-row justify-between mt-10  gap-2  ">
+        <View className="flex-row justify-between mt-10 gap-2">
           <FlatList
             data={features}
             keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (<FeatureCard icon={item.icon} title={item.title} subtitle={item.subtitle} />)}
             horizontal
             showsHorizontalScrollIndicator={false}
-            ItemSeparatorComponent={() => <View className="w-1" />}
+            renderItem={({ item }) => (
+              <View className="rounded-[12px] p-4 w-[156px] h-[130px] bg-[#233029B2] mr-2">
+                <Image source={item.icon} />
+                <Text className="text-white font-rubik-medium text-xl mt-2">{item.title}</Text>
+                <Text className="text-white font-rubik text-[12px] mt-1">{item.subtitle}</Text>
+              </View>
+            )}
           />
         </View>
 
-        <View className="mt-10 ">
+        <View className="mt-10">
 
-          <PlanCard
-            selected={selectedPlan === "month"}
-            title='1 Month'
-            description='$2.99/month, auto renewable'
-            onPress={() => setSelectedPlan("month")}
-          />
 
-          <PlanCard
-            selected={selectedPlan === "year"}
-            title='1 Year'
-            description='First 3 days free, then $529.99/year'
-            onPress={() => setSelectedPlan("year")}
-            badge="Save 50%"
-          />
+          <TouchableOpacity
+            className={`rounded-xl p-4 flex-row items-center relative mb-2 
+  ${selectedPlan === 'month' ? 'border-green-500 bg-black/20 border-[1.5px]' : 'border-[#FFFFFF4D] bg-[#1C2923] border'}`}
+            onPress={() => setSelectedPlan('month')}
+            activeOpacity={0.7}
+          >
+            <View className={`w-8 h-8 rounded-3xl mr-4 ${selectedPlan === 'month' ? 'bg-[#28AF6E] justify-center items-center' : 'bg-[#2E3A34]'}`}>
+              {selectedPlan === 'month' && (
+                <View className="w-3 h-3 rounded-3xl bg-white" />
+              )}
+            </View>
+            <View>
+              <Text className="text-white font-rubik-bold">1 Month</Text>
+              <Text className="text-gray-400 text-xs mt-1 font-rubik">
+                $2.99/month, auto renewable
+              </Text>
+            </View>
+          </TouchableOpacity>
+
+
+          <TouchableOpacity
+            className={`rounded-xl p-4 flex-row items-center relative mb-2 ${selectedPlan === 'year' ? 'border-green-500 bg-black/20 border-[1.5px]' : 'border-[#FFFFFF4D] bg-[#1C2923] border'}`}
+            onPress={() => setSelectedPlan('year')}
+            activeOpacity={0.7}
+          >
+            <View className={`w-8 h-8 rounded-3xl mr-4 ${selectedPlan === 'year' ? 'bg-[#28AF6E] justify-center items-center' : 'bg-[#2E3A34]'}`}>
+              {selectedPlan === 'year' && (
+                <View className="w-3 h-3 rounded-3xl bg-white" />
+              )}
+            </View>
+            <View>
+              <Text className="text-white font-rubik-bold">1 Year</Text>
+              <Text className="text-gray-400 text-xs mt-1 font-rubik">
+                First 3 days free, then $529.99/year
+              </Text>
+            </View>
+
+
+            <View className="absolute top-0 right-0 bg-green-500 px-2 py-1 rounded-md">
+              <Text className="text-white text-[10px] font-rubik-bold">Save 50%</Text>
+            </View>
+          </TouchableOpacity>
+
         </View>
 
 
@@ -110,7 +146,7 @@ export default function Paywall() {
 
         <View className=" justify-center space-x-6 mt-6 mb-6 items-center">
           <Text className='text-[#FFFFFF85] font-rubik text-[9px] text-center' >After the 3-day free trial period you’ll be charged ₺274.99 per year unless you cancel before the trial expires. Yearly Subscription is Auto-Renewable</Text>
-          <View className='flex-row mt-4 items-center '>
+          <View className='flex-row mt-4 items-center  '>
             <Text className="text-[#FFFFFF80] text-xs font-rubik mr-1">Terms</Text>
             <Text className="text-[#FFFFFF80] text-md  mr-1">•</Text>
             <Text className="text-[#FFFFFF80] text-xs font-rubik mr-1">Privacy</Text>

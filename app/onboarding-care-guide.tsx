@@ -45,7 +45,7 @@ export default function OnboardingTakePhoto() {
         <View className="w-full items-center mb-5">
           <TouchableOpacity
              className="bg-[#28AF6E] w-[327px] p-[18px] rounded-xl "
-             onPress={() => router.push('/paywall')}
+             onPress={() => router.replace('/paywall')}
 
           >
             <Text className="text-white text-center font-bold text-lg">Continue</Text>
